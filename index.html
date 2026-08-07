@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#121210">
+  <meta name="description" content="Inscrição oficial para o Retiro de Jovens da PIBR Maracanaú.">
+  <title>Retiro de Jovens | PIBR Maracanaú</title>
+
+  <style>
+    :root {
+      --preto: #121210;
+      --preto-2: #1d1c19;
+      --dourado: #d49a00;
+      --dourado-claro: #f0bd3c;
+      --creme: #f4efe4;
+      --branco: #fffdf8;
+      --texto: #24221d;
+      --cinza: #746f65;
+      --linha: #ddd4c3;
+      --perigo: #b23b32;
+      --sucesso: #27744d;
+      --raio: 22px;
+      --sombra: 0 24px 70px rgba(20, 18, 12, .13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at 10% 0, rgba(212, 154, 0, .16), transparent 24rem),
+        var(--creme);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .container {
+      width: min(1120px, calc(100% - 28px));
+      margin-inline: auto;
+    }
+
+    .topo {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      background: var(--preto);
+      color: #f7edd8;
+      border-bottom: 1px solid rgba(240, 189, 60, .28);
+    }
+
+    .topo .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--dourado-claro);
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #54ce86;
+      box-shadow: 0 0 0 5px rgba(84, 206, 134, .12);
+    }
+
+    .hero {
+      padding: 24px 0 44px;
+      background:
+        linear-gradient(135deg, rgba(212, 154, 0, .08), transparent 38%),
+        var(--preto);
+      border-bottom: 5px solid var(--dourado);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .98fr) minmax(330px, .72fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .banner-frame {
+      position: relative;
+      max-width: 650px;
+      margin-inline: auto;
+      overflow: hidden;
+      border: 1px solid rgba(240, 189, 60, .33);
+      border-radius: 26px;
+      background: #e9e0d0;
+      box-shadow: 0 30px 100px rgba(0, 0, 0, .46);
+    }
+
+    .banner-frame::after {
+      content: "Banner oficial";
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(13, 13, 12, .68);
+      backdrop-filter: blur(9px);
+      font-size: .67rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .banner-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-card {
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid rgba(240, 189, 60, .25);
+      border-radius: 26px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 80% 5%, rgba(212, 154, 0, .22), transparent 16rem),
+        #1a1916;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .25);
+    }
+
+    .selo {
+      display: inline-flex;
+      padding: 8px 12px;
+      border: 1px solid rgba(240, 189, 60, .35);
+      border-radius: 999px;
+      color: var(--dourado-claro);
+      font-size: .69rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .hero-card h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2.15rem, 5vw, 4.4rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+
+    .hero-card h1 span { color: var(--dourado-claro); }
+
+    .hero-card > p {
+      margin: 0 0 23px;
+      color: #ccc4b7;
+      font-size: .96rem;
+    }
+
+    .resumo {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 24px;
+    }
+
+    .resumo-item {
+      min-height: 80px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .resumo-item small {
+      display: block;
+      margin-bottom: 5px;
+      color: #a9a296;
+      font-size: .63rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .resumo-item strong {
+      color: #fff;
+      font-size: .9rem;
+      line-height: 1.25;
+    }
+
+    .btn {
+      min-height: 54px;
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 15px;
+      padding: 0 20px;
+      color: #17140e;
+      background: linear-gradient(135deg, var(--dourado-claro), var(--dourado));
+      box-shadow: 0 14px 35px rgba(212, 154, 0, .24);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    main { padding: 58px 0 100px; }
+
+    .atalhos {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 52px;
+    }
+
+    .atalho {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      border: 1px solid var(--linha);
+      border-radius: 18px;
+      background: rgba(255, 253, 248, .88);
+      box-shadow: 0 8px 28px rgba(38, 31, 18, .06);
+    }
+
+    .atalho-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #171611;
+      color: var(--dourado-claro);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .atalho strong {
+      margin-top: 13px;
+      font-size: .86rem;
+      line-height: 1.25;
+    }
+
+    .titulo-secao {
+      margin-bottom: 20px;
+    }
+
+    .titulo-secao small {
+      display: block;
+      margin-bottom: 6px;
+      color: #956a05;
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .titulo-secao h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .form-card {
+      overflow: hidden;
+      border: 1px solid rgba(212, 154, 0, .25);
+      border-radius: var(--raio);
+      background: var(--branco);
+      box-shadow: var(--sombra);
+    }
+
+    .form-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px clamp(20px, 4vw, 36px);
+      color: #fff;
+      background:
+        linear-gradient(100deg, rgba(212, 154, 0, .16), transparent 48%),
+        var(--preto-2);
+    }
+
+    .form-head strong {
+      display: block;
+      font-size: 1.12rem;
+    }
+
+    .form-head small { color: #cfc7ba; }
+
+    .pagamento-pix {
+      margin: 18px 22px 0;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid #ead7a1;
+      border-radius: 16px;
+      background: #fff9e9;
+    }
+
+    .pagamento-pix small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cinza);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pagamento-pix strong {
+      display: block;
+      color: #211b0f;
+      font-size: .95rem;
+      overflow-wrap: anywhere;
+    }
+
+    .pagamento-pix p {
+      margin: 6px 0 0;
+      color: var(--cinza);
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+
+    .pagamento-condicional {
+      padding: 16px;
+      border: 1px solid #ead7a1;
+      border-radius: 14px;
+      background: #fff9e9;
+    }
+
+    .pagamento-condicional .chave-pix-form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #eadfbe;
+    }
+
+    .pagamento-condicional .chave-pix-form span {
+      color: var(--cinza);
+      font-size: .72rem;
+      font-weight: 850;
+    }
+
+    .pagamento-condicional .chave-pix-form strong {
+      display: block;
+      margin-top: 3px;
+      color: #211b0f;
+      font-size: .92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .arquivo-ajuda {
+      display: block;
+      margin-top: 7px;
+      color: var(--cinza);
+      font-size: .7rem;
+      line-height: 1.4;
+    }
+
+    .nota-pagamento {
+      padding: 14px 15px;
+      border: 1px solid #d8d0c2;
+      border-radius: 13px;
+      color: #4b463e;
+      background: #f5f1e9;
+      font-size: .77rem;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      background: #fff;
+    }
+
+    input[type="file"]::file-selector-button {
+      min-height: 36px;
+      margin-right: 10px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 9px;
+      color: #fff;
+      background: var(--preto);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .copiar-pix {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--preto);
+      font-size: .76rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .copiar-pix:active { transform: scale(.98); }
+
+    .valor {
+      flex: 0 0 auto;
+      padding: 12px 16px;
+      border: 1px solid rgba(240, 189, 60, .3);
+      border-radius: 15px;
+      color: var(--dourado-claro);
+      background: rgba(255, 255, 255, .04);
+      font-weight: 900;
+    }
+
+    .etapas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 18px clamp(18px, 4vw, 36px) 0;
+    }
+
+    .etapa-indicador {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--linha);
+      border-radius: 13px;
+      color: var(--cinza);
+      background: #faf7f0;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .etapa-indicador span {
+      flex: 0 0 27px;
+      width: 27px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #e9e2d5;
+      color: #696258;
+      font-size: .7rem;
+    }
+
+    .etapa-indicador.ativa {
+      border-color: #d6a31f;
+      color: #5d4207;
+      background: #fff3cf;
+    }
+
+    .etapa-indicador.ativa span,
+    .etapa-indicador.concluida span {
+      color: #18140c;
+      background: var(--dourado-claro);
+    }
+
+    form { padding: clamp(22px, 4vw, 38px); }
+
+    .passo { display: none; }
+    .passo.ativo { display: block; animation: aparecer .25s ease; }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .passo-titulo {
+      margin: 0 0 20px;
+      font-size: 1.12rem;
+    }
+
+    .grid-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .campo { min-width: 0; }
+    .campo.largo { grid-column: 1 / -1; }
+
+    label,
+    .rotulo {
+      display: block;
+      margin-bottom: 7px;
+      color: #37332c;
+      font-size: .77rem;
+      font-weight: 850;
+    }
+
+    .obrigatorio::after { content: " *"; color: var(--perigo); }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 51px;
+      padding: 13px 14px;
+      border: 1px solid #d6cebf;
+      border-radius: 12px;
+      outline: none;
+      color: var(--texto);
+      background: #fff;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    textarea { min-height: 102px; resize: vertical; }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 4px rgba(212, 154, 0, .13);
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: #aaa297; }
+
+    .opcoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .opcao { position: relative; }
+    .opcao input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .opcao label {
+      min-width: 92px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0 15px;
+      border: 1px solid #d6cebf;
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .opcao input:checked + label {
+      border-color: #b98500;
+      color: #5f4300;
+      background: #fff0c2;
+      box-shadow: 0 0 0 3px rgba(212, 154, 0, .11);
+    }
+
+    .condicional { display: none; }
+    .condicional.visivel { display: block; }
+    .check.condicional.visivel { display: grid; }
+
+    .aviso-menor {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 13px 14px;
+      border: 1px solid #e3c36d;
+      border-radius: 12px;
+      color: #684a09;
+      background: #fff5d7;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .aviso-menor.visivel { display: block; }
+
+    .check {
+      display: grid;
+      grid-template-columns: 21px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--linha);
+      border-radius: 13px;
+      background: #faf7f0;
+    }
+
+    .check input {
+      width: 19px;
+      min-height: 19px;
+      margin: 2px 0 0;
+      accent-color: var(--dourado);
+    }
+
+    .check label { margin: 0; font-weight: 650; line-height: 1.45; }
+
+    .acoes {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .botao {
+      min-height: 50px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 13px;
+      font-size: .84rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .botao-voltar {
+      color: #3c3730;
+      background: #eee8dc;
+    }
+
+    .botao-avancar,
+    .botao-enviar {
+      margin-left: auto;
+      color: #17140e;
+      background: linear-gradient(135deg, var(--dourado-claro), var(--dourado));
+    }
+
+    .botao[hidden] { display: none; }
+
+    .rodape {
+      padding: 30px 14px 88px;
+      text-align: center;
+      color: #aaa296;
+      background: var(--preto);
+      font-size: .78rem;
+    }
+
+    .rodape strong { color: var(--dourado-claro); }
+
+    .cta-mobile {
+      display: none;
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      z-index: 30;
+      min-height: 54px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      color: #17140e;
+      background: linear-gradient(135deg, var(--dourado-claro), var(--dourado));
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .33);
+      text-decoration: none;
+      font-size: .86rem;
+      font-weight: 900;
+    }
+
+    .mensagem-status {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .mensagem-status.erro {
+      display: block;
+      border: 1px solid #e3aca8;
+      color: #7e2b25;
+      background: #fff0ef;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { max-width: 650px; width: 100%; margin-inline: auto; }
+      .atalhos { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 650px) {
+      .topo .container { font-size: .68rem; }
+      .topo .container span:first-child { max-width: 58%; }
+      .hero { padding-top: 14px; }
+      .hero-grid { gap: 15px; }
+      .banner-frame, .hero-card { border-radius: 19px; }
+      .hero-card { padding: 22px 18px; }
+      .hero-card h1 { font-size: 2.35rem; }
+      .hero-card > p { font-size: .86rem; }
+      .resumo-item { min-height: 74px; padding: 12px; }
+      main { padding: 40px 0 86px; }
+      .atalhos { gap: 9px; margin-bottom: 40px; }
+      .atalho { min-height: 100px; padding: 14px; }
+      .etapas { gap: 6px; padding-inline: 14px; }
+      .etapa-indicador { justify-content: center; padding: 9px; }
+      .etapa-indicador b { display: none; }
+      .grid-form { grid-template-columns: 1fr; }
+      .campo.largo { grid-column: auto; }
+      form { padding: 21px 16px 24px; }
+      .form-head { padding: 18px 16px; }
+      .form-head small { display: none; }
+      .valor { padding: 10px 12px; font-size: .83rem; }
+      .pagamento-pix { margin: 14px 14px 0; align-items: flex-start; }
+      .copiar-pix { min-height: 40px; }
+      .acoes { position: sticky; bottom: 74px; z-index: 5; padding-top: 10px; background: linear-gradient(transparent, var(--branco) 28%); }
+      .cta-mobile { display: flex; }
+      .rodape { padding-bottom: 95px; }
+    }
+
+    @media (max-width: 390px) {
+      .resumo { grid-template-columns: 1fr; }
+      .atalhos { grid-template-columns: 1fr; }
+      .atalho { min-height: 82px; flex-direction: row; justify-content: flex-start; align-items: center; gap: 13px; }
+      .atalho strong { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="container">
+      <span>PIBR Maracanaú • Geração Eleita</span>
+      <span class="status">Inscrições abertas</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <figure class="banner-frame">
+        <img src="banner-retiro.jpg" alt="Banner oficial do Retiro de Jovens: Juventude para a Glória de Deus" loading="eager" fetchpriority="high">
+      </figure>
+
+      <div class="hero-card">
+        <span class="selo">Retiro de jovens</span>
+        <h1>Juventude para a <span>Glória de Deus</span></h1>
+        <p>Faça sua inscrição em poucos passos.</p>
+
+        <div class="resumo" aria-label="Resumo do evento">
+          <div class="resumo-item"><small>Data</small><strong>16, 17 e 18 de outubro</strong></div>
+          <div class="resumo-item"><small>Valor</small><strong>R$ 140,00</strong></div>
+          <div class="resumo-item"><small>Local</small><strong>Chácara Nova Esperança</strong></div>
+          <div class="resumo-item"><small>Preletor</small><strong>Pr. Hailton Costa</strong></div>
+        </div>
+
+        <a class="btn" href="#inscricao">Fazer minha inscrição ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <section class="atalhos" aria-label="Informações importantes">
+        <article class="atalho"><span class="atalho-icon">＋</span><strong>Informe alergias e medicamentos</strong></article>
+        <article class="atalho"><span class="atalho-icon">☎</span><strong>Tenha um contato de emergência</strong></article>
+        <article class="atalho"><span class="atalho-icon">✓</span><strong>Confirmação enviada pela liderança</strong></article>
+      </section>
+
+      <section id="inscricao">
+        <header class="titulo-secao">
+          <small>Inscrição oficial</small>
+          <h2>Preencha em 3 etapas</h2>
+        </header>
+
+        <div class="form-card">
+          <div class="form-head">
+            <div>
+              <strong>Retiro PIBR Maracanaú</strong>
+              <small>Campos com * são obrigatórios.</small>
+            </div>
+            <div class="valor">R$ 140,00</div>
+          </div>
+
+          <div class="pagamento-pix" aria-label="Formas de pagamento">
+            <div>
+              <small>Formas de pagamento • R$ 140,00</small>
+              <strong>Pix, cartão ou dinheiro</strong>
+              <p>Cartão e dinheiro são pagos presencialmente. No Pix, anexe o comprovante ao finalizar a inscrição.</p>
+              <p><strong id="chave-pix">Pix: geleita526@gmail.com</strong></p>
+            </div>
+            <button class="copiar-pix" id="copiar-pix" type="button">Copiar Pix</button>
+          </div>
+
+          <div class="etapas" aria-label="Progresso da inscrição">
+            <div class="etapa-indicador ativa" data-indicador="0"><span>1</span><b>Participante</b></div>
+            <div class="etapa-indicador" data-indicador="1"><span>2</span><b>Saúde</b></div>
+            <div class="etapa-indicador" data-indicador="2"><span>3</span><b>Pagamento</b></div>
+          </div>
+
+          <!-- Troque SEU_CODIGO pelo código do seu formulário no Formspree. -->
+          <form id="formulario-retiro" action="https://formspree.io/f/xnpanzwb" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="evento" value="Retiro de Jovens - PIBR Maracanaú">
+            <input type="hidden" name="chave_pix" value="geleita526@gmail.com">
+            <input type="hidden" name="valor_inscricao" value="R$ 140,00">
+
+            <section class="passo ativo" data-passo="0">
+              <h3 class="passo-titulo">Dados do participante</h3>
+              <div class="grid-form">
+                <div class="campo largo">
+                  <label class="obrigatorio" for="nome">Nome completo</label>
+                  <input id="nome" name="nome_completo" type="text" autocomplete="name" placeholder="Nome do jovem" required>
+                </div>
+
+                <div class="campo">
+                  <label class="obrigatorio" for="idade">Idade</label>
+                  <input id="idade" name="idade" type="number" min="10" max="99" inputmode="numeric" placeholder="Ex.: 16" required>
+                </div>
+
+                <div class="campo">
+                  <label class="obrigatorio" for="telefone">Telefone / WhatsApp</label>
+                  <input id="telefone" name="telefone_participante" type="tel" autocomplete="tel" inputmode="tel" placeholder="(85) 90000-0000" required>
+                </div>
+
+                <div class="campo">
+                  <label class="obrigatorio" for="camisa">Tamanho da camisa</label>
+                  <select id="camisa" name="tamanho_camisa" required>
+                    <option value="">Selecione</option>
+                    <option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option>
+                  </select>
+                </div>
+
+                <div class="campo">
+                  <label class="obrigatorio" for="igreja">Igreja que frequenta</label>
+                  <input id="igreja" name="igreja" type="text" placeholder="Ex.: PIBR Maracanaú" required>
+                </div>
+
+                <div id="aviso-menor" class="aviso-menor">Participante menor de 18 anos: o pai, a mãe ou o responsável legal deverá preencher os dados e confirmar a autorização na etapa 3.</div>
+              </div>
+            </section>
+
+            <section class="passo" data-passo="1">
+              <h3 class="passo-titulo">Saúde e cuidados</h3>
+              <div class="grid-form">
+                <div class="campo largo">
+                  <span class="rotulo obrigatorio">Possui alergia ou restrição alimentar?</span>
+                  <div class="opcoes">
+                    <div class="opcao"><input id="alergia-nao" type="radio" name="possui_alergia" value="Não" required><label for="alergia-nao">Não</label></div>
+                    <div class="opcao"><input id="alergia-sim" type="radio" name="possui_alergia" value="Sim"><label for="alergia-sim">Sim</label></div>
+                  </div>
+                </div>
+
+                <div id="detalhes-alergia" class="campo largo condicional">
+                  <label class="obrigatorio" for="alergias">Qual alergia ou restrição?</label>
+                  <textarea id="alergias" name="alergias_restricoes" placeholder="Informe o alimento, reação e cuidados necessários."></textarea>
+                </div>
+
+                <div class="campo largo">
+                  <span class="rotulo obrigatorio">Usa medicamento contínuo?</span>
+                  <div class="opcoes">
+                    <div class="opcao"><input id="medicamento-nao" type="radio" name="usa_medicamento" value="Não" required><label for="medicamento-nao">Não</label></div>
+                    <div class="opcao"><input id="medicamento-sim" type="radio" name="usa_medicamento" value="Sim"><label for="medicamento-sim">Sim</label></div>
+                  </div>
+                </div>
+
+                <div id="detalhes-medicamento" class="campo largo condicional">
+                  <label class="obrigatorio" for="medicamentos">Medicamento e orientações</label>
+                  <textarea id="medicamentos" name="medicamentos_orientacoes" placeholder="Nome, horário e cuidados necessários."></textarea>
+                </div>
+
+                <div class="campo largo">
+                  <label for="observacoes">Outra condição de saúde importante</label>
+                  <textarea id="observacoes" name="condicoes_saude" placeholder="Deixe em branco quando não houver."></textarea>
+                </div>
+              </div>
+            </section>
+
+            <section class="passo" data-passo="2">
+              <h3 class="passo-titulo">Responsável, pagamento e confirmação</h3>
+              <div class="grid-form">
+                <div class="campo largo">
+                  <label id="label-responsavel" for="responsavel">Nome do pai, mãe ou responsável</label>
+                  <input id="responsavel" name="nome_responsavel" type="text" autocomplete="name" placeholder="Nome completo">
+                </div>
+
+                <div class="campo">
+                  <label id="label-parentesco" for="parentesco">Parentesco</label>
+                  <select id="parentesco" name="parentesco">
+                    <option value="">Selecione</option>
+                    <option>Pai</option><option>Mãe</option><option>Avô/Avó</option><option>Tio/Tia</option><option>Irmão/Irmã</option><option>Outro responsável</option>
+                  </select>
+                </div>
+
+                <div class="campo">
+                  <label id="label-telefone-responsavel" for="telefone-responsavel">Telefone do responsável</label>
+                  <input id="telefone-responsavel" name="telefone_responsavel" type="tel" autocomplete="tel" inputmode="tel" placeholder="(85) 90000-0000">
+                </div>
+
+                <div class="campo largo">
+                  <label class="obrigatorio" for="emergencia">Contato de emergência</label>
+                  <input id="emergencia" name="contato_emergencia" type="tel" inputmode="tel" placeholder="(85) 90000-0000" required>
+                </div>
+
+                <div class="campo largo">
+                  <span class="rotulo obrigatorio">Forma de pagamento</span>
+                  <div class="opcoes" role="radiogroup" aria-label="Forma de pagamento">
+                    <div class="opcao"><input id="pagamento-pix" type="radio" name="forma_pagamento" value="Pix" required><label for="pagamento-pix">Pix</label></div>
+                    <div class="opcao"><input id="pagamento-cartao" type="radio" name="forma_pagamento" value="Cartão presencial"><label for="pagamento-cartao">Cartão</label></div>
+                    <div class="opcao"><input id="pagamento-dinheiro" type="radio" name="forma_pagamento" value="Dinheiro presencial"><label for="pagamento-dinheiro">Dinheiro</label></div>
+                  </div>
+                </div>
+
+                <div id="dados-pix" class="campo largo condicional pagamento-condicional">
+                  <div class="chave-pix-form">
+                    <div>
+                      <span>Chave Pix</span>
+                      <strong>geleita526@gmail.com</strong>
+                    </div>
+                    <span>Valor: <strong>R$ 140,00</strong></span>
+                  </div>
+                  <label class="obrigatorio" for="comprovante-pix">Comprovante do Pix</label>
+                  <input id="comprovante-pix" name="comprovante_pix" type="file" accept="image/*">
+                  <small class="arquivo-ajuda">Envie uma foto ou imagem legível do comprovante. Arquivos em PDF não são aceitos.</small>
+                </div>
+
+                <div id="aviso-pagamento-presencial" class="campo largo condicional nota-pagamento">
+                  O pagamento de <strong>R$ 140,00</strong> será realizado presencialmente com cartão ou dinheiro.
+                </div>
+
+                <div id="autorizacao-menor-bloco" class="campo largo check condicional">
+                  <input id="autorizacao-menor" name="autorizacao_menor" type="checkbox" value="Autorizado pelo responsável legal">
+                  <label class="obrigatorio" for="autorizacao-menor"><strong>Autorização para menor de idade:</strong> Eu, na condição de pai, mãe ou responsável legal, autorizo o(a) menor inscrito(a) a participar do Retiro de Jovens da PIBR Maracanaú, nos dias 16, 17 e 18 de outubro.</label>
+                </div>
+
+                <div class="campo largo check">
+                  <input id="consentimento" name="consentimento" type="checkbox" value="Concordo" required>
+                  <label class="obrigatorio" for="consentimento">Confirmo que os dados estão corretos e autorizo a liderança da PIBR Maracanaú a entrar em contato sobre esta inscrição.</label>
+                </div>
+              </div>
+            </section>
+
+            <div class="acoes">
+              <button id="voltar" class="botao botao-voltar" type="button" hidden>← Voltar</button>
+              <button id="avancar" class="botao botao-avancar" type="button">Continuar →</button>
+              <button id="enviar" class="botao botao-enviar" type="submit" hidden>Enviar inscrição ✓</button>
+            </div>
+
+            <div id="mensagem-status" class="mensagem-status" role="alert"></div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <strong>PIBR MARACANAÚ</strong><br>
+    R. Castro Carreiro, 360 — Mucunã, Maracanaú — CE, 61914-050
+  </footer>
+
+  <a class="cta-mobile" href="#inscricao">Fazer inscrição</a>
+
+  <script>
+    const botaoCopiarPix = document.getElementById('copiar-pix');
+    const chavePix = 'geleita526@gmail.com';
+
+    botaoCopiarPix.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(chavePix);
+        botaoCopiarPix.textContent = 'Pix copiado ✓';
+      } catch (erro) {
+        const campoTemporario = document.createElement('textarea');
+        campoTemporario.value = chavePix;
+        document.body.appendChild(campoTemporario);
+        campoTemporario.select();
+        document.execCommand('copy');
+        campoTemporario.remove();
+        botaoCopiarPix.textContent = 'Pix copiado ✓';
+      }
+      setTimeout(() => botaoCopiarPix.textContent = 'Copiar Pix', 2200);
+    });
+
+    const formulario = document.getElementById('formulario-retiro');
+    const passos = [...document.querySelectorAll('.passo')];
+    const indicadores = [...document.querySelectorAll('.etapa-indicador')];
+    const botaoVoltar = document.getElementById('voltar');
+    const botaoAvancar = document.getElementById('avancar');
+    const botaoEnviar = document.getElementById('enviar');
+    const mensagemStatus = document.getElementById('mensagem-status');
+    let passoAtual = 0;
+
+    function mostrarPasso(indice) {
+      passoAtual = indice;
+      passos.forEach((passo, i) => passo.classList.toggle('ativo', i === indice));
+      indicadores.forEach((item, i) => {
+        item.classList.toggle('ativa', i === indice);
+        item.classList.toggle('concluida', i < indice);
+      });
+      botaoVoltar.hidden = indice === 0;
+      botaoAvancar.hidden = indice === passos.length - 1;
+      botaoEnviar.hidden = indice !== passos.length - 1;
+      mensagemStatus.className = 'mensagem-status';
+      mensagemStatus.textContent = '';
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validarPassoAtual() {
+      const campos = [...passos[passoAtual].querySelectorAll('input, select, textarea')]
+        .filter(campo => !campo.disabled && campo.offsetParent !== null);
+
+      for (const campo of campos) {
+        if (!campo.checkValidity()) {
+          campo.reportValidity();
+          campo.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    botaoAvancar.addEventListener('click', () => {
+      if (validarPassoAtual()) mostrarPasso(Math.min(passoAtual + 1, passos.length - 1));
+    });
+
+    botaoVoltar.addEventListener('click', () => mostrarPasso(Math.max(passoAtual - 1, 0)));
+
+    const idade = document.getElementById('idade');
+    const avisoMenor = document.getElementById('aviso-menor');
+    const responsavel = document.getElementById('responsavel');
+    const parentesco = document.getElementById('parentesco');
+    const telefoneResponsavel = document.getElementById('telefone-responsavel');
+    const autorizacaoMenorBloco = document.getElementById('autorizacao-menor-bloco');
+    const autorizacaoMenor = document.getElementById('autorizacao-menor');
+    const rotulosResponsavel = [
+      document.getElementById('label-responsavel'),
+      document.getElementById('label-parentesco'),
+      document.getElementById('label-telefone-responsavel')
+    ];
+
+    function atualizarResponsavel() {
+      const menor = Number(idade.value) > 0 && Number(idade.value) < 18;
+      avisoMenor.classList.toggle('visivel', menor);
+      autorizacaoMenorBloco.classList.toggle('visivel', menor);
+      autorizacaoMenor.required = menor;
+      if (!menor) autorizacaoMenor.checked = false;
+      [responsavel, parentesco, telefoneResponsavel].forEach(campo => campo.required = menor);
+      rotulosResponsavel.forEach(rotulo => rotulo.classList.toggle('obrigatorio', menor));
+    }
+
+    idade.addEventListener('input', atualizarResponsavel);
+
+    function controlarCondicional(nome, valorSim, blocoId, campoId) {
+      const radios = [...document.querySelectorAll(`input[name="${nome}"]`)];
+      const bloco = document.getElementById(blocoId);
+      const campo = document.getElementById(campoId);
+
+      radios.forEach(radio => radio.addEventListener('change', () => {
+        const ativo = radio.checked && radio.value === valorSim;
+        if (radio.checked) {
+          bloco.classList.toggle('visivel', ativo);
+          campo.required = ativo;
+          if (!ativo) campo.value = '';
+        }
+      }));
+    }
+
+    controlarCondicional('possui_alergia', 'Sim', 'detalhes-alergia', 'alergias');
+    controlarCondicional('usa_medicamento', 'Sim', 'detalhes-medicamento', 'medicamentos');
+
+    const formasPagamento = [...document.querySelectorAll('input[name="forma_pagamento"]')];
+    const dadosPix = document.getElementById('dados-pix');
+    const avisoPagamentoPresencial = document.getElementById('aviso-pagamento-presencial');
+    const comprovantePix = document.getElementById('comprovante-pix');
+
+    function atualizarPagamento() {
+      const selecionado = document.querySelector('input[name="forma_pagamento"]:checked')?.value || '';
+      const pagamentoPix = selecionado === 'Pix';
+      const pagamentoPresencial = selecionado === 'Cartão presencial' || selecionado === 'Dinheiro presencial';
+
+      dadosPix.classList.toggle('visivel', pagamentoPix);
+      avisoPagamentoPresencial.classList.toggle('visivel', pagamentoPresencial);
+      comprovantePix.required = pagamentoPix;
+
+      if (!pagamentoPix) comprovantePix.value = '';
+    }
+
+    formasPagamento.forEach(opcao => opcao.addEventListener('change', atualizarPagamento));
+
+    comprovantePix.addEventListener('change', () => {
+      const arquivo = comprovantePix.files[0];
+      if (arquivo && !arquivo.type.startsWith('image/')) {
+        comprovantePix.value = '';
+        comprovantePix.setCustomValidity('Envie o comprovante como imagem. PDF não é aceito.');
+        comprovantePix.reportValidity();
+      } else {
+        comprovantePix.setCustomValidity('');
+      }
+    });
+
+    function aplicarMascaraTelefone(campo) {
+      campo.addEventListener('input', () => {
+        let valor = campo.value.replace(/\D/g, '').slice(0, 11);
+        if (valor.length > 10) {
+          valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4})$/, '($1) $2-$3');
+        } else if (valor.length > 6) {
+          valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+        } else if (valor.length > 2) {
+          valor = valor.replace(/^(\d{2})(\d+)/, '($1) $2');
+        } else if (valor.length) {
+          valor = valor.replace(/^(\d{0,2})/, '($1');
+        }
+        campo.value = valor;
+      });
+    }
+
+    ['telefone', 'telefone-responsavel', 'emergencia'].forEach(id => aplicarMascaraTelefone(document.getElementById(id)));
+
+    formulario.addEventListener('submit', (evento) => {
+      atualizarResponsavel();
+      atualizarPagamento();
+      if (!validarPassoAtual() || !formulario.checkValidity()) {
+        evento.preventDefault();
+        mensagemStatus.className = 'mensagem-status erro';
+        mensagemStatus.textContent = 'Confira os campos obrigatórios antes de enviar.';
+        formulario.reportValidity();
+      }
+    });
+  </script>
+</body>
+</html>
