@@ -791,7 +791,7 @@
             <div>
               <small>Formas de pagamento • R$ 140,00</small>
               <strong>Pix, cartão ou dinheiro</strong>
-              <p>Cartão e dinheiro são pagos presencialmente. No Pix, anexe o comprovante ao finalizar a inscrição.</p>
+              <p>Cartão e dinheiro são pagos presencialmente. No Pix, envie o comprovante pelo WhatsApp: <strong>+55 85 8608-9718</strong>.</p>
               <p><strong id="chave-pix">Pix: geleita526@gmail.com</strong></p>
             </div>
             <button class="copiar-pix" id="copiar-pix" type="button">Copiar Pix</button>
@@ -804,10 +804,11 @@
           </div>
 
           <!-- Troque SEU_CODIGO pelo código do seu formulário no Formspree. -->
-          <form id="formulario-retiro" action="https://formspree.io/f/xnpanzwb" method="POST" enctype="multipart/form-data">
+          <form id="formulario-retiro" action="https://formspree.io/f/xnpanzwb" method="POST">
             <input type="hidden" name="evento" value="Retiro de Jovens - PIBR Maracanaú">
             <input type="hidden" name="chave_pix" value="geleita526@gmail.com">
             <input type="hidden" name="valor_inscricao" value="R$ 140,00">
+            <input type="hidden" name="envio_comprovante" value="WhatsApp: +55 85 8608-9718">
 
             <section class="passo ativo" data-passo="0">
               <h3 class="passo-titulo">Dados do participante</h3>
@@ -923,9 +924,9 @@
                     </div>
                     <span>Valor: <strong>R$ 140,00</strong></span>
                   </div>
-                  <label class="obrigatorio" for="comprovante-pix">Comprovante do Pix</label>
-                  <input id="comprovante-pix" name="comprovante_pix" type="file" accept="image/*">
-                  <small class="arquivo-ajuda">Envie uma foto ou imagem legível do comprovante. Arquivos em PDF não são aceitos.</small>
+                  <span class="rotulo">Comprovante do Pix</span>
+                  <a class="btn" href="https://wa.me/558586089718?text=Ol%C3%A1%2C%20estou%20enviando%20o%20comprovante%20do%20Pix%20da%20inscri%C3%A7%C3%A3o%20do%20Retiro%20de%20Jovens%20da%20PIBR%20Maracana%C3%BA." target="_blank" rel="noopener noreferrer">Enviar comprovante pelo WhatsApp</a>
+                  <small class="arquivo-ajuda">Depois de fazer o Pix, envie a imagem do comprovante para <strong>+55 85 8608-9718</strong>. O comprovante não será anexado neste formulário.</small>
                 </div>
 
                 <div id="aviso-pagamento-presencial" class="campo largo condicional nota-pagamento">
@@ -1074,7 +1075,6 @@
     const formasPagamento = [...document.querySelectorAll('input[name="forma_pagamento"]')];
     const dadosPix = document.getElementById('dados-pix');
     const avisoPagamentoPresencial = document.getElementById('aviso-pagamento-presencial');
-    const comprovantePix = document.getElementById('comprovante-pix');
 
     function atualizarPagamento() {
       const selecionado = document.querySelector('input[name="forma_pagamento"]:checked')?.value || '';
@@ -1083,23 +1083,9 @@
 
       dadosPix.classList.toggle('visivel', pagamentoPix);
       avisoPagamentoPresencial.classList.toggle('visivel', pagamentoPresencial);
-      comprovantePix.required = pagamentoPix;
-
-      if (!pagamentoPix) comprovantePix.value = '';
     }
 
     formasPagamento.forEach(opcao => opcao.addEventListener('change', atualizarPagamento));
-
-    comprovantePix.addEventListener('change', () => {
-      const arquivo = comprovantePix.files[0];
-      if (arquivo && !arquivo.type.startsWith('image/')) {
-        comprovantePix.value = '';
-        comprovantePix.setCustomValidity('Envie o comprovante como imagem. PDF não é aceito.');
-        comprovantePix.reportValidity();
-      } else {
-        comprovantePix.setCustomValidity('');
-      }
-    });
 
     function aplicarMascaraTelefone(campo) {
       campo.addEventListener('input', () => {
