@@ -18,6 +18,8 @@ const botaoCopiarPix = document.getElementById('copiar-pix');
     });
 
     const formulario = document.getElementById('formulario-retiro');
+    // Validate each step in JavaScript so hidden invalid fields can be revealed.
+    formulario.noValidate = true;
     const passos = [...document.querySelectorAll('.passo')];
     const indicadores = [...document.querySelectorAll('.etapa-indicador')];
     const botaoVoltar = document.getElementById('voltar');
@@ -142,13 +144,16 @@ const botaoCopiarPix = document.getElementById('copiar-pix');
 
     formulario.addEventListener('submit', async (evento) => {
       evento.preventDefault();
+      if (botaoEnviar.disabled) return;
       atualizarResponsavel();
       atualizarPagamento();
 
-      if (!validarPassoAtual() || !formulario.checkValidity()) {
+      const invalidStep = passos.findIndex(passo => [...passo.querySelectorAll('input, select, textarea')].some(campo => !campo.checkValidity()));
+      if (invalidStep !== -1) {
+        mostrarPasso(invalidStep);
+        validarPassoAtual();
         mensagemStatus.className = 'mensagem-status erro';
         mensagemStatus.textContent = 'Confira os campos obrigatórios antes de enviar.';
-        formulario.reportValidity();
         return;
       }
 

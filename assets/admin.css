@@ -37,3 +37,6 @@ dialog{width:min(720px,calc(100% - 24px));max-height:88vh;padding:0;border:0;bor
 @media(max-width:850px){.metrics{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.desktop-table{display:none}.mobile-list{display:block}.mobile-card{padding:15px;border-bottom:1px solid var(--line)}.mobile-card:last-child{border-bottom:0}.mobile-row{display:flex;justify-content:space-between;align-items:start;gap:12px}.mobile-card .participant{min-width:0}.mobile-meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}}
 @media(max-width:560px){.admin-topbar-inner,.container{width:min(100% - 20px,1180px)}.brand small{display:none}.dashboard{padding-top:20px}.dashboard-head{align-items:start}.dashboard-head p{max-width:260px}.metrics{grid-template-columns:1fr 1fr}.metric{min-height:98px;padding:14px}.metric strong{font-size:1.55rem}.toolbar{grid-template-columns:1fr}.toolbar input{grid-column:auto}.detail-grid{grid-template-columns:1fr}.detail-item.wide{grid-column:auto}dialog{width:100%;max-height:92vh;margin:auto 0 0;border-radius:22px 22px 0 0}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Preserve native hidden semantics despite component display rules. */
+[hidden]{display:none!important}

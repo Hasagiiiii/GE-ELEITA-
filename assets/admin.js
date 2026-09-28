@@ -3,7 +3,7 @@
 
   const CONFIG = window.GE_CONFIG;
   const SESSION_KEY = 'ge_admin_session';
-  const state = { token: sessionStorage.getItem(SESSION_KEY) || '', page: 1, pages: 1, total: 0, loading: false, timer: null };
+  const state = { token: sessionStorage.getItem(SESSION_KEY) || '', page: 1, pages: 1, total: 0, loading: false, timer: null, revision: 0, listRequest: 0, detailRequest: 0, expiryTimer: null };
 
   const loginView = document.getElementById('login-view');
   const dashboardView = document.getElementById('dashboard-view');
@@ -35,14 +35,14 @@
     if (!value) return '—';
     const date = new Date(value);
     return Number.isNaN(date.getTime()) ? '—' : new Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit'
+      day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit', timeZone: 'America/Fortaleza'
     }).format(date);
   }
 
   function phoneLink(value) {
     const digits = String(value || '').replace(/\D/g, '');
     if (!digits) return '';
-    const full = digits.startsWith('55') ? digits : '55' + digits;
+    const full = digits.length === 12 || digits.length === 13 ? digits : '55' + digits;
     return 'https://wa.me/' + full;
   }
 
@@ -67,6 +67,20 @@
     return data;
   }
 
+  function scheduleExpiry() {
+    clearTimeout(state.expiryTimer);
+    try {
+      const part = state.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/');
+      const expires = JSON.parse(atob(part)).exp * 1000;
+      if (!Number.isFinite(expires) || expires <= Date.now()) throw new Error('expired');
+      state.expiryTimer = setTimeout(() => { logout(false); showLogin('Sua sessão expirou. Entre novamente.'); }, Math.min(expires - Date.now(), 2147483647));
+      return true;
+    } catch (_) {
+      logout(false);
+      return false;
+    }
+  }
+
   function showDashboard() {
     loginView.hidden = true;
     dashboardView.hidden = false;
@@ -82,7 +96,18 @@
   }
 
   function logout(showMessage = true) {
+    state.revision++;
+    state.listRequest++;
+    state.detailRequest++;
+    clearTimeout(state.timer);
+    clearTimeout(state.expiryTimer);
+    state.page = 1;
     state.token = '';
+    dialog.close();
+    detailBody.replaceChildren();
+    detailName.textContent = 'Participante';
+    ['metric-total', 'metric-minors', 'metric-health', 'metric-pix'].forEach(id => document.getElementById(id).textContent = '—');
+    document.getElementById('shirts').replaceChildren();
     sessionStorage.removeItem(SESSION_KEY);
     tableBody.replaceChildren();
     mobileList.replaceChildren();
@@ -100,6 +125,7 @@
       state.token = data.token;
       sessionStorage.setItem(SESSION_KEY, state.token);
       passcodeInput.value = '';
+      if (!scheduleExpiry()) throw new Error('Sessão inválida. Entre novamente.');
       showDashboard();
       await refreshAll();
     } catch (error) {
@@ -144,7 +170,9 @@
   }
 
   async function loadSummary() {
+    const revision = state.revision;
     const data = await api('summary');
+    if (revision !== state.revision || !state.token) return;
     setMetric('metric-total', data.total);
     setMetric('metric-minors', data.menores);
     setMetric('metric-health', data.alertas_saude);
@@ -236,7 +264,9 @@
   }
 
   async function loadParticipants() {
-    if (state.loading) return;
+    if (!state.token) return;
+    const request = ++state.listRequest;
+    const revision = state.revision;
     state.loading = true;
     prevBtn.disabled = true;
     nextBtn.disabled = true;
@@ -250,6 +280,7 @@
         health: healthFilter.value
       });
 
+      if (request !== state.listRequest || revision !== state.revision || !state.token) return;
       state.pages = data.pages || 1;
       state.total = data.total || 0;
       const items = data.items || [];
@@ -261,10 +292,13 @@
       prevBtn.disabled = state.page <= 1;
       nextBtn.disabled = state.page >= state.pages;
     } catch (error) {
+      if (request !== state.listRequest || revision !== state.revision || !state.token) return;
+      tableBody.replaceChildren();
+      mobileList.replaceChildren();
       emptyState.hidden = false;
       emptyState.textContent = error.message;
     } finally {
-      state.loading = false;
+      if (request === state.listRequest) state.loading = false;
     }
   }
 
@@ -341,6 +375,8 @@
   }
 
   async function openDetail(id) {
+    const request = ++state.detailRequest;
+    const revision = state.revision;
     detailName.textContent = 'Carregando…';
     detailBody.replaceChildren();
     const loading = document.createElement('div');
@@ -352,9 +388,11 @@
 
     try {
       const data = await api('detail', { id: id });
+      if (request !== state.detailRequest || revision !== state.revision || !state.token || !dialog.open) return;
       detailName.textContent = valueOrDash(data.item.nome_completo);
       renderDetail(data.item);
     } catch (error) {
+      if (request !== state.detailRequest || revision !== state.revision || !state.token || !dialog.open) return;
       detailName.textContent = 'Erro';
       detailBody.textContent = error.message;
     }
@@ -365,6 +403,13 @@
     refreshBtn.textContent = 'Atualizando…';
     try {
       await Promise.all([loadSummary(), loadParticipants()]);
+    } catch (error) {
+      if (state.token) {
+        emptyState.hidden = false;
+        emptyState.textContent = error.message;
+      } else {
+        showLogin(error.message);
+      }
     } finally {
       refreshBtn.disabled = false;
       refreshBtn.textContent = 'Atualizar';
@@ -387,11 +432,12 @@
     if (state.page < state.pages) { state.page++; loadParticipants(); }
   });
   document.getElementById('close-dialog').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => { state.detailRequest++; detailBody.replaceChildren(); });
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
 
-  if (state.token) {
+  if (state.token && scheduleExpiry()) {
     showDashboard();
     refreshAll().catch(() => logout(false));
   } else {
