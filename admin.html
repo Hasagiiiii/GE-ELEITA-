@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#151512">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Área administrativa das inscrições do Retiro de Jovens da PIBR Maracanaú.">
+  <title>Administração | Geração Eleita</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <header class="admin-topbar">
+      <div class="admin-topbar-inner">
+        <div class="brand">
+          <span class="brand-mark">GE</span>
+          <div><small>Geração Eleita</small><strong>Administração</strong></div>
+        </div>
+        <div class="top-actions">
+          <a class="ghost-btn" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">Ver site</a>
+          <button id="logout-btn" class="ghost-btn" type="button" hidden>Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="login-view" class="container login-wrap">
+        <form id="login-form" class="login-card" autocomplete="off">
+          <div class="login-icon" aria-hidden="true">◆</div>
+          <h1>Acesso administrativo</h1>
+          <p>Use o código de administração para consultar os participantes. A sessão fica ativa somente neste navegador e expira automaticamente.</p>
+          <div class="field">
+            <label for="admin-passcode">Código de acesso</label>
+            <input id="admin-passcode" name="passcode" type="password" minlength="16" autocomplete="current-password" required autofocus>
+          </div>
+          <button id="login-btn" class="gold-btn" type="submit">Entrar</button>
+          <div id="login-error" class="login-error" role="alert" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section id="dashboard-view" class="container dashboard" hidden>
+        <header class="dashboard-head">
+          <div>
+            <small>Retiro de jovens</small>
+            <h1>Participantes</h1>
+            <p>Visão resumida primeiro; respostas completas somente ao abrir o cadastro.</p>
+          </div>
+          <button id="refresh-btn" class="dark-btn" type="button">Atualizar</button>
+        </header>
+
+        <div class="metrics" aria-label="Resumo das inscrições">
+          <article class="metric"><span>Inscritos</span><strong id="metric-total">—</strong><small>Total registrado</small></article>
+          <article class="metric"><span>Menores</span><strong id="metric-minors">—</strong><small>Precisam de responsável</small></article>
+          <article class="metric"><span>Saúde</span><strong id="metric-health">—</strong><small>Com alergia ou medicamento</small></article>
+          <article class="metric"><span>Pix</span><strong id="metric-pix">—</strong><small>Escolheram pagamento via Pix</small></article>
+        </div>
+
+        <div id="shirts" class="shirts" aria-label="Distribuição de camisas">
+          <strong>Camisas:</strong><span class="size-chip">Carregando…</span>
+        </div>
+
+        <section class="panel">
+          <div class="toolbar">
+            <input id="search-input" type="search" placeholder="Buscar participante pelo nome…" aria-label="Buscar participante">
+            <select id="payment-filter" aria-label="Filtrar por pagamento">
+              <option value="">Todos os pagamentos</option>
+              <option value="Pix">Pix</option>
+              <option value="Cartão presencial">Cartão</option>
+              <option value="Dinheiro presencial">Dinheiro</option>
+            </select>
+            <select id="health-filter" aria-label="Filtrar por saúde">
+              <option value="">Todos</option>
+              <option value="alerta">Com alerta de saúde</option>
+              <option value="sem-alerta">Sem alerta de saúde</option>
+            </select>
+          </div>
+
+          <div class="desktop-table table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Participante</th><th>Idade</th><th>Camisa</th><th>Pagamento</th><th>Saúde</th><th>Inscrição</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="participants-body"></tbody>
+            </table>
+          </div>
+          <div id="mobile-list" class="mobile-list"></div>
+          <div id="empty-state" class="empty" hidden>Nenhum participante encontrado com esses filtros.</div>
+
+          <div class="pagination">
+            <span id="pagination-info">—</span>
+            <div class="pagination-actions">
+              <button id="prev-btn" class="view-btn" type="button">← Anterior</button>
+              <button id="next-btn" class="view-btn" type="button">Próxima →</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="participant-dialog">
+    <div class="detail-head">
+      <div><small>Ficha completa</small><h2 id="detail-name">Participante</h2></div>
+      <button id="close-dialog" class="close-btn" type="button" aria-label="Fechar">×</button>
+    </div>
+    <div id="detail-body" class="detail-body"><div class="loading-line">Carregando…</div></div>
+  </dialog>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/admin.js" defer></script>
+</body>
+</html>
